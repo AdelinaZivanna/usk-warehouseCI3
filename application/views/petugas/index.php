@@ -53,20 +53,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $no=1; foreach($stok_produk as $p) : ?>
+                    <?php foreach ($stok_produk as $p) : ?>
                         <tr>
-                            <td><?= $no++; ?></td>
-                            <td><?= $p['name']; ?></td> 
-                            <td><?= $p['stock']; ?> <?= $p['unit']; ?></td> 
-                            <td>
-                                <?php if($p['stock'] <= $p['min_stock']) : ?>
-                                    <span class="badge badge-danger">Hampir Habis</span>
+                            <td><?= $p['nama_barang']; ?></td> <td><?= $p['stok_saat_ini']; ?></td> <td><?= $p['satuan']; ?></td> <td>
+                                <?php if ($p['stok_saat_ini'] <= 5) : ?>
+                                    <span class="badge badge-danger">Menipis</span>
                                 <?php else : ?>
                                     <span class="badge badge-success">Aman</span>
                                 <?php endif; ?>
                             </td>
                         </tr>
-                        <?php endforeach; ?>
+                    <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>

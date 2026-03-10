@@ -10,7 +10,7 @@
     <hr class="sidebar-divider">
     <div class="sidebar-heading">Laporan</div>
     <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('index.php/manajer/laporan_masuk') ?>">
+        <a class="nav-link" href="<?= base_url('index.php/manajer/laporan_stok') ?>">
             <i class="fas fa-fw fa-file-import"></i><span>Laporan Masuk</span></a>
     </li>
     <li class="nav-item">

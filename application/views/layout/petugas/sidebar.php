@@ -23,4 +23,11 @@
         <span>Barang Keluar</span>
     </a>
 </li>
+
+<li class="nav-item">
+    <a class="nav-link" href="<?= base_url('index.php/petugas/stock_opname'); ?>">
+        <i class="fas fa-fw fa-clipboard-check"></i>
+        <span>Stock Opname</span>
+    </a>
+</li>
 </ul>

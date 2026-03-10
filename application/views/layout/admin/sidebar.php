@@ -20,11 +20,6 @@
     <div class="sidebar-heading">Master Data</div>
 
 <li class="nav-item">
-    <a class="nav-link" href="<?= base_url('index.php/admin/categories') ?>">
-        <i class="fas fa-fw fa-tag"></i> <span>Kategori Barang</span></a>
-</li>
-
-<li class="nav-item">
     <a class="nav-link" href="<?= base_url('index.php/admin/suppliers') ?>">
         <i class="fas fa-fw fa-truck"></i> <span>Supplier</span></a>
 </li>
@@ -40,13 +35,13 @@
     <div class="sidebar-heading">Transaksi</div>
 
     <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('index.php/admin/transaction_in') ?>">
+        <a class="nav-link" href="<?= base_url('index.php/admin/transaction_in_add') ?>">
             <i class="fas fa-fw fa-arrow-down text-success"></i>
             <span>Barang Masuk</span></a>
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('index.php/admin/transaction_out') ?>">
+        <a class="nav-link" href="<?= base_url('index.php/admin/transaction_out_add') ?>">
             <i class="fas fa-fw fa-arrow-up text-danger"></i>
             <span>Barang Keluar</span></a>
     </li>

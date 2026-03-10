@@ -3,43 +3,39 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_petugas extends CI_Model {
 
-    // Fungsi ini yang tadi dianggap "Undefined" atau tidak ada
     public function get_transaction_in() {
-        $this->db->select('transaction_ins.*, products.name as product_name, suppliers.name as supplier_name, users.name as user_name');
-        $this->db->from('transaction_ins');
-        $this->db->join('products', 'products.id = transaction_ins.product_id', 'left');
-        $this->db->join('suppliers', 'suppliers.id = transaction_ins.supplier_id', 'left');
-        $this->db->join('users', 'users.id = transaction_ins.user_id', 'left');
-        $this->db->order_by('transaction_ins.datetime', 'DESC');
+        $this->db->select('barang_masuk.*, barang.nama_barang as product_name, supplier.name as supplier_name, users.name as user_name');
+        $this->db->from('barang_masuk');
+        $this->db->join('barang', 'barang.id_barang = barang_masuk.id_barang', 'left');
+        $this->db->join('supplier', 'supplier.id = barang_masuk.supplier_id', 'left');
+        $this->db->join('users', 'users.id = barang_masuk.id_user', 'left');
+        $this->db->order_by('barang_masuk.datetime', 'DESC');
         return $this->db->get()->result_array();
     }
 
     public function insert_transaction_in($data) {
-        $this->db->insert('transaction_ins', $data);
-        $this->db->set('stock', 'stock + ' . (int)$data['qty'], FALSE);
-        $this->db->where('id', $data['product_id']);
-        return $this->db->update('products');
+        return $this->db->insert('barang_masuk', $data);
     }
 
-    public function get_suppliers() {
-        return $this->db->get('suppliers')->result_array();
-    }
-
-    // Sekalian tambahkan fungsi Barang Keluar supaya tidak error nanti
     public function get_transaction_out() {
-        // Tambahkan destination di select
-        $this->db->select('transaction_outs.*, products.name as product_name, users.name as user_name');
-        $this->db->from('transaction_outs');
-        $this->db->join('products', 'products.id = transaction_outs.product_id', 'left');
-        $this->db->join('users', 'users.id = transaction_outs.user_id', 'left');
-        $this->db->order_by('transaction_outs.datetime', 'DESC');
+        $this->db->select('barang_keluar.*, barang.nama_barang as product_name, users.name as user_name');
+        $this->db->from('barang_keluar'); 
+        $this->db->join('barang', 'barang.id_barang = barang_keluar.id_barang', 'left');
+        $this->db->join('users', 'users.id = barang_keluar.id_user', 'left');
+        $this->db->order_by('barang_keluar.datetime', 'DESC');
         return $this->db->get()->result_array();
     }
 
     public function insert_transaction_out($data) {
-        $this->db->insert('transaction_outs', $data);
-        $this->db->set('stock', 'stock - ' . (int)$data['qty'], FALSE);
-        $this->db->where('id', $data['product_id']);
-        return $this->db->update('products');
+        return $this->db->insert('barang_keluar', $data); 
+    }
+
+    public function get_suppliers() {
+        return $this->db->get('supplier')->result_array();
+    }
+
+    public function count_low_stock() {
+        $this->db->where('stok_saat_ini <=', 5); 
+        return $this->db->count_all_results('barang');
     }
 }
